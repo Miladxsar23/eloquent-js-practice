@@ -3,7 +3,7 @@ function verify(ptr, yes, no) {
   	if(!ptr.test(str)) console.log(`Failure to match '${str}'`)
   }
   for(let str of no) {
-		if(ptr.test(str)) console.log(`Unexpected match for '${str}'`)
+	if(ptr.test(str)) console.log(`Unexpected match for '${str}'`)
   }
 }
 //1 --> cat, car
