@@ -54,7 +54,7 @@
     const hat = document.querySelector("img[alt='hat']");
     var TOP = cat.getBoundingClientRect().top + pageYOffset;
     var LEFT = cat.getBoundingClientRect().left + pageXOffset;
-    var code = requestAnimationFrame(animate);
+    var code = 0;
     let angle = 0;
     window.addEventListener("resize", function (evt) {
       window.cancelAnimationFrame(code);
@@ -87,5 +87,6 @@
         animate(newTime, time);
       });
     }
+    requestAnimationFrame(animate);
   </script>
 </html>
