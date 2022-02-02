@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>request animation frame</title>
+  </head>
+  <style>
+    /* reboot */
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      overflow-x: hidden !important;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    /* styles */
+    .parent {
+      width: 100%;
+      min-height: 200px;
+      position: relative;
+    }
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <body>
+    <div class="parent">
+      <img src="http://eloquentjs.ir/img/cat.png" alt="cat" />
+      <img src="http://eloquentjs.ir/img/hat.png" alt="hat" />
+    </div>
+  </body>
+  <script>
+    "use strict";
+    const cat = document.querySelector("img[alt='cat']");
+    const hat = document.querySelector("img[alt='hat']");
+    var TOP = cat.getBoundingClientRect().top + pageYOffset;
+    var LEFT = cat.getBoundingClientRect().left + pageXOffset;
+    let angle = 0;
+    let lastTime = null;
+    function animate(time) {
+      if (lastTime != null) {
+        angle += (time - lastTime) * 0.001;
+      }
+      lastTime = time;
+      cat.style.top = Math.sin(angle) * 50 + TOP + "px";
+      cat.style.left = Math.cos(angle) * 100 + LEFT + "px";
+      hat.style.top = Math.sin(angle + Math.PI) * 50 + TOP + "px";
+      hat.style.left = Math.cos(angle + Math.PI) * 100 + LEFT + "px";
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  </script>
+</html>
