@@ -38,6 +38,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
+      margin-top: 100px;
       transform: translate(-50%, -50%);
     }
   </style>
@@ -53,19 +54,38 @@
     const hat = document.querySelector("img[alt='hat']");
     var TOP = cat.getBoundingClientRect().top + pageYOffset;
     var LEFT = cat.getBoundingClientRect().left + pageXOffset;
+    var code = requestAnimationFrame(animate);
     let angle = 0;
-    let lastTime = null;
-    function animate(time) {
+    window.addEventListener("resize", function (evt) {
+      window.cancelAnimationFrame(code);
+      resetPosition(cat);
+      resetPosition(hat);
+      setPositionResize();
+      code = requestAnimationFrame(animate);
+    });
+    /* reset image position when window resize*/
+    function resetPosition(elt) {
+      elt.style.top = "50%";
+      elt.style.left = "50%";
+      elt.style.transform = "translate(-50%, -50%)";
+    }
+    /* reset TOP, LEFT global variable when resize window */
+    function setPositionResize() {
+      TOP = cat.getBoundingClientRect().top + pageYOffset;
+      LEFT = cat.getBoundingClientRect().left + pageXOffset;
+    }
+
+    function animate(time, lastTime = null) {
       if (lastTime != null) {
         angle += (time - lastTime) * 0.001;
       }
-      lastTime = time;
       cat.style.top = Math.sin(angle) * 50 + TOP + "px";
       cat.style.left = Math.cos(angle) * 100 + LEFT + "px";
       hat.style.top = Math.sin(angle + Math.PI) * 50 + TOP + "px";
       hat.style.left = Math.cos(angle + Math.PI) * 100 + LEFT + "px";
-      requestAnimationFrame(animate);
+      code = requestAnimationFrame((newTime) => {
+        animate(newTime, time);
+      });
     }
-    requestAnimationFrame(animate);
   </script>
 </html>
