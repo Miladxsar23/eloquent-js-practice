@@ -32,3 +32,20 @@ function drawZigzagLine(context) {
   }
   context.stroke();
 }
+//spiral
+function drawSpiral(context) {
+  let centerX = 90,
+    centerY = 90,
+    radius = 50;
+  context.beginPath();
+  context.moveTo(centerX, centerY);
+  for (let i = 0; i < 300; i++) {
+    let angle = (i * Math.PI) / 30;
+    let dist = (radius * i) / 300;
+    context.lineTo(
+      centerX + Math.cos(angle) * dist,
+      centerY + Math.sin(angle) * dist
+    );
+  }
+  context.stroke();
+}
