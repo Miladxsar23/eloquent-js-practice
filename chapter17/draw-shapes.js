@@ -33,10 +33,7 @@ function drawZigzagLine(context) {
   context.stroke();
 }
 //spiral
-function drawSpiral(context) {
-  let centerX = 90,
-    centerY = 90,
-    radius = 50;
+function drawSpiral(context, centerX, centerY, radius) {
   context.beginPath();
   context.moveTo(centerX, centerY);
   for (let i = 0; i < 300; i++) {
@@ -48,4 +45,23 @@ function drawSpiral(context) {
     );
   }
   context.stroke();
+}
+
+//start
+function drawStar(context, centerX, centerY) {
+  const radius = 50;
+  context.beginPath();
+  context.fillStyle = "gold";
+  context.moveTo(centerX + radius, centerY);
+  for (let i = 1; i <= 8; i++) {
+    const angle = i * (Math.PI / 4);
+    context.quadraticCurveTo(
+      centerX,
+      centerY,
+      centerX + Math.cos(angle) * radius,
+      centerY + Math.sin(angle) * radius
+    );
+  }
+  context.closePath();
+  context.fill();
 }
