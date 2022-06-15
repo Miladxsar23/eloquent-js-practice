@@ -1,0 +1,37 @@
+@mixin flex($t, $w, $j, $a) {
+  display: flex;
+  flex-flow: $t $w;
+  justify-content: $j;
+  align-items: $a
+}
+
+.app {
+  display : block;
+  margin : auto 20px;
+  &-code-editor{
+    @include flex(column, nowrap, center, center)
+    &-header {}
+    &-body{
+      width : 100%;
+      & textarea {
+        width : 100%;
+        min-height : 200px;
+      }
+      &-button {
+        width : 100%;
+        & button {
+          min-width : 100px;
+          display : block;
+          margin : auto;
+        }
+      }
+    }
+    &-footer {
+      background : #e7e7e7;
+      width : 100%;
+      margin-top : 20px;
+      min-height : 100px;
+    }
+  }
+}
+
